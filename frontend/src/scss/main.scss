@@ -1,0 +1,63 @@
+@import "~normalize.css";
+@import "~milligram-scss";
+
+$color-background: #fffffe;
+$color-text: #5f6c7b;
+$color-headlines: #094067;
+$color-buttons: #3da9fc;
+$color-secondary: #90b4ce;
+$color-tertiary: #ef4565;
+
+html {
+    background-color: $color-background;
+    color: $color-text;
+}
+
+body {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-bottom: 60px;
+}
+
+.container {
+    max-width: 80.0rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $color-headlines;
+}
+
+p {
+    color: $color-text;
+}
+
+a {
+    color: $color-tertiary;
+    &:hover, &:focus {
+        color: $color-text;
+    }
+}
+
+.wrapper {
+    padding-top: 60px;
+}
+
+.home {
+    text-align: center;
+}
+
+footer {
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    a {
+        padding: 0 10px;
+        color: $color-secondary;
+        &:hover, &:focus {
+            color: $color-text;
+        }
+    }
+}
