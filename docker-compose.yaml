@@ -8,3 +8,13 @@ services:
         ports:
             - 8000:8000
             - 8080:8080
+
+    api:
+        build: api/
+        entrypoint: CompileDaemon -log-prefix=false -build="go build" -command="./api"
+        ports:
+            - "40000:40000"
+            - "8081:8081"
+        volumes:
+            - ./api:/api
+        tty: true

@@ -3,6 +3,7 @@
         <router-view />
         <footer>
             <div class="container">
+                <router-link to="/">Home</router-link>
                 <router-link to="/privacy">Privacy</router-link>
                 <router-link to="/terms">Terms</router-link>
                 <router-link to="/about">About</router-link>
