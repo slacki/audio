@@ -16,7 +16,9 @@ func main() {
 	// db := initDb()
 	// migrateDb(db)
 
-	env := &handlers.Env{}
+	env := &handlers.Env{
+		UploadPath: "./uploads",
+	}
 
 	r := mux.NewRouter()
 	apiV1 := r.PathPrefix("/api/v1").Subrouter()

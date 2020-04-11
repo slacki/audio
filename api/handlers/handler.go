@@ -39,6 +39,7 @@ func (se StatusError) Status() int {
 
 // Env represents a (simple) application-wide configuration.
 type Env struct {
+	UploadPath string
 	// DB *sqlx.DB
 	// WS *ws.Hub
 }
