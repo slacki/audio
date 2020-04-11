@@ -18,3 +18,15 @@ services:
         volumes:
             - ./api:/api
         tty: true
+
+    static:
+        build: static/
+        restart: always
+        environment: 
+            - VIRTUAL_HOST=i.slacki.io
+            - LETSENCRYPT_HOST=i.slacki.io
+            - LETSENCRYPT_EMAIL=kacperczochara@gmail.com
+        volumes:
+            - ./api/uploads:/var/www
+        ports: 
+            - "127.0.0.1:8082:80"
