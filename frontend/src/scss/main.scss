@@ -50,6 +50,7 @@ footer {
     a {
         padding: 0 10px;
         color: $color-secondary;
+        display: inline-block;
         &:hover, &:focus {
             color: $color-text;
         }

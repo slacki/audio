@@ -1,15 +1,16 @@
 package handlers
 
 import (
+	models "api/models"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
-	"mime"
 	"net/http"
 	"os"
 	"path/filepath"
 
+	"github.com/gabriel-vasile/mimetype"
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -24,7 +25,7 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 	}
 
 	// parse and validate file and post parameters
-	file, _, err := r.FormFile("file")
+	file, fileHandler, err := r.FormFile("files")
 	if err != nil {
 		return HTTPError(http.StatusBadRequest, "invalid_file", err)
 	}
@@ -34,25 +35,28 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 		return HTTPError(http.StatusBadRequest, "invalid_file", err)
 	}
 
-	// check file type, DetectContentType only needs the first 512 bytes
-	detectedFileType := http.DetectContentType(fileBytes)
-	switch detectedFileType {
-	case "audio/mpeg3", "audio/x-mpeg-3":
-	case "audio/wav", "audio/x-wav":
+	// check mime type
+	mimeFromRequest := http.DetectContentType(fileBytes)
+	log.Println("Detected file type:", mimeFromRequest)
+	switch mimeFromRequest {
+	case "audio/mpeg3", "audio/x-mpeg-3", "audio/mpeg":
+	case "audio/wav", "audio/x-wav", "audio/wave":
 	case "audio/ogg":
 		break
 	default:
+		log.Println("Invalid file type:", mimeFromRequest)
 		return HTTPError(http.StatusBadRequest, "invalid_file_type", err)
 	}
-	fileName := uuid.NewV4().String()
-	fileEndings, err := mime.ExtensionsByType(detectedFileType)
-	if err != nil {
-		return HTTPError(http.StatusInternalServerError, "cant_read_file_type", err)
-	}
-	newPath := filepath.Join(env.UploadPath, fileName+fileEndings[0])
-	log.Printf("FileType: %s, File: %s\n", detectedFileType, newPath)
 
-	// write file
+	// get file extension and create new file path
+	fileExtension := mimetype.Detect(fileBytes).Extension()
+	if len(fileExtension) == 0 {
+		return HTTPError(http.StatusInternalServerError, "cant_determine_file_ext", err)
+	}
+	fileName := uuid.NewV4().String()
+	newPath := filepath.Join(env.UploadPath, fileName+fileExtension)
+
+	// write file to the storage
 	newFile, err := os.Create(newPath)
 	if err != nil {
 		return HTTPError(http.StatusInternalServerError, "cant_write_file", err)
@@ -62,11 +66,21 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 		return HTTPError(http.StatusInternalServerError, "cant_write_file", err)
 	}
 
+	// store data
+	env.DB.Write(models.DBAudio, fileName, models.Audio{
+		File:         fileName + fileExtension,
+		Hash:         fileName,
+		Views:        0,
+		OriginalName: fileHandler.Filename,
+	})
+
 	// write response
 	responseStruct := struct {
 		File string `json:"file"`
+		Hash string `json:"hash"`
 	}{
-		File: newPath,
+		File: fileName + fileExtension,
+		Hash: fileName,
 	}
 	response, err := json.Marshal(responseStruct)
 	if err != nil {

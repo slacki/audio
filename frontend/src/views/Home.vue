@@ -1,23 +1,17 @@
 <template>
     <div class="container home">
-        <h1>Upload your audio</h1>
-        <p class="upload-info">
-            mp3, wav and ogg
-            <br />maximum of 15 megabytes
-        </p>
-
-        <upload-button></upload-button>
+        <upload></upload>
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import UploadButton from "@/components/UploadButton.vue";
+import Upload from "@/components/Upload.vue";
 
 export default {
     name: "Home",
     components: {
-        UploadButton
+        Upload
     }
 };
 </script>

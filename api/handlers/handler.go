@@ -5,6 +5,8 @@ import (
 	"errors"
 	"log"
 	"net/http"
+
+	scribble "github.com/nanobox-io/golang-scribble"
 )
 
 // Error represents a handler error. It provides methods for a HTTP status
@@ -40,6 +42,7 @@ func (se StatusError) Status() int {
 // Env represents a (simple) application-wide configuration.
 type Env struct {
 	UploadPath string
+	DB         *scribble.Driver
 	// DB *sqlx.DB
 	// WS *ws.Hub
 }

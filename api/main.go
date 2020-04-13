@@ -4,35 +4,43 @@ import (
 	"api/handlers"
 	"log"
 	"net/http"
-	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/gorilla/mux"
+	scribble "github.com/nanobox-io/golang-scribble"
 	"github.com/rs/cors"
 )
 
 func main() {
-	// db := initDb()
+	db := initDb()
 	// migrateDb(db)
 
 	env := &handlers.Env{
 		UploadPath: "./uploads",
+		DB:         db,
 	}
 
 	r := mux.NewRouter()
 	apiV1 := r.PathPrefix("/api/v1").Subrouter()
-	// regular routes
 	apiV1.Handle("/upload", handlers.Handler{Env: env, H: handlers.HandleUpload}).Methods("POST")
+	apiV1.Handle("/info/{id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", handlers.Handler{Env: env, H: handlers.HandleUpload}).Methods("GET")
 
 	srv := &http.Server{
-		Handler:      cors.Default().Handler(r),
-		Addr:         "0.0.0.0:8081",
-		WriteTimeout: 15 * time.Second,
-		ReadTimeout:  15 * time.Second,
+		Handler: cors.Default().Handler(r),
+		Addr:    "0.0.0.0:8081",
 	}
 
 	log.Fatal(srv.ListenAndServe())
+}
+
+func initDb() *scribble.Driver {
+	db, err := scribble.New("./_data", nil)
+	if err != nil {
+		log.Fatalln("Database error:", err)
+	}
+
+	return db
 }
 
 // func initDb() *sqlx.DB {
