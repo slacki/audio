@@ -7,4 +7,6 @@ type Audio struct {
 	Hash         string `json:"hash"`
 	Views        int    `json:"views"`
 	OriginalName string `json:"original_name"`
+	CreatedAt    string `json:"created_at"`
+	ModifiedAt   string `json:"modified_at"`
 }

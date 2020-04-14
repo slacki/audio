@@ -1,6 +1,6 @@
 <template>
     <div class="container home">
-        <upload></upload>
+        <upload @uploaded="onUploaded"></upload>
     </div>
 </template>
 
@@ -12,6 +12,14 @@ export default {
     name: "Home",
     components: {
         Upload
+    },
+    methods: {
+        onUploaded(e) {
+            this.$router.push({
+                name: "UploadedFile",
+                params: { id: e.hash }
+            });
+        }
     }
 };
 </script>

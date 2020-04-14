@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/gabriel-vasile/mimetype"
 	uuid "github.com/satori/go.uuid"
@@ -72,14 +73,14 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 		Hash:         fileName,
 		Views:        0,
 		OriginalName: fileHandler.Filename,
+		CreatedAt:    time.RFC3339,
+		ModifiedAt:   time.Now().String(),
 	})
 
 	// write response
 	responseStruct := struct {
-		File string `json:"file"`
 		Hash string `json:"hash"`
 	}{
-		File: fileName + fileExtension,
 		Hash: fileName,
 	}
 	response, err := json.Marshal(responseStruct)

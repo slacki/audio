@@ -12,8 +12,6 @@
                     name="files"
                     class="file-upload-field"
                     type="file"
-                    value
-                    multiple
                     accept=".wav, .ogg, .mp3"
                     @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
                 />
@@ -73,7 +71,7 @@ export default {
             this.axios
                 .post("/upload", formData, config)
                 .then(r => {
-                    console.log(r);
+                    this.$emit("uploaded", r.data);
                 })
                 .catch(e => {
                     console.log(e);
