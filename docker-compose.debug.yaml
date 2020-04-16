@@ -1,0 +1,8 @@
+# supposed to be run combined with docker-compose.yaml
+
+version: '3.7'
+services:
+  api:
+    security_opt:
+      - seccomp:unconfined
+    entrypoint: dlv debug -l 0.0.0.0:40000 --headless=true --api-version=2 --log=true -- server 
