@@ -42,7 +42,7 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 	switch mimeFromRequest {
 	case "audio/mpeg3", "audio/x-mpeg-3", "audio/mpeg":
 	case "audio/wav", "audio/x-wav", "audio/wave":
-	case "audio/ogg":
+	case "audio/ogg", "application/ogg":
 		break
 	default:
 		log.Println("Invalid file type:", mimeFromRequest)
