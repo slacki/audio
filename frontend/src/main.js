@@ -11,7 +11,7 @@ import './scss/main.scss'
 axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
 Vue.use(VueAxios, axios);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 new Vue({
     router,
     store,

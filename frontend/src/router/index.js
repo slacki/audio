@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Uploaded from '../views/Uploaded.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +13,7 @@ const routes = [
     {
         path: '/u/:id',
         name: 'UploadedFile',
-        component: Uploaded,
+        component: () => import('../views/Uploaded.vue')
     },
     {
         path: '/about',
@@ -39,7 +38,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    routes
-})
+    mode: 'history',
+    routes,
+});
 
-export default router
+export default router;
