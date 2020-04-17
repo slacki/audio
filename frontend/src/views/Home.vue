@@ -16,7 +16,7 @@ export default {
     methods: {
         onUploaded(e) {
             this.$router.push({
-                name: "UploadedFile",
+                name: "uploadedFile",
                 params: { id: e.hash }
             });
         }

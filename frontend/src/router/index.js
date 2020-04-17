@@ -7,32 +7,32 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        name: 'Home',
+        name: 'home',
         component: Home
     },
     {
-        path: '/u/:id',
-        name: 'UploadedFile',
+        path: '/:id',
+        name: 'uploadedFile',
         component: () => import('../views/Uploaded.vue')
     },
     {
         path: '/about',
-        name: 'About',
+        name: 'about',
         component: () => import('../views/About.vue')
     },
     {
         path: '/privacy',
-        name: 'Privacy Policy',
+        name: 'privacyPolicy',
         component: () => import('../views/Privacy.vue')
     },
     {
         path: '/terms',
-        name: 'Terms',
+        name: 'terms',
         component: () => import('../views/Terms.vue')
     },
     {
         path: '/contact',
-        name: 'Contact',
+        name: 'contact',
         component: () => import('../views/Contact.vue')
     },
 ]

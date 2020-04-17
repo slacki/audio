@@ -3,11 +3,11 @@
         <router-view />
         <footer>
             <div class="container">
-                <router-link to="/">Home</router-link>
-                <router-link to="/privacy">Privacy</router-link>
-                <router-link to="/terms">Terms</router-link>
-                <router-link to="/about">About</router-link>
-                <router-link to="/contact">Contact</router-link>
+                <router-link :to="{ name: 'home' }">Home</router-link>
+                <router-link :to="{ name: 'privacyPolicy' }">Privacy</router-link>
+                <router-link :to="{ name: 'terms' }">Terms</router-link>
+                <router-link :to="{ name: 'about' }">About</router-link>
+                <router-link :to="{ name: 'contact' }">Contact</router-link>
             </div>
         </footer>
     </div>
