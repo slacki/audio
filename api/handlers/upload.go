@@ -73,8 +73,8 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 		Hash:         fileName,
 		Views:        0,
 		OriginalName: fileHandler.Filename,
-		CreatedAt:    time.RFC3339,
-		ModifiedAt:   time.Now().String(),
+		CreatedAt:    time.Now().UTC().Format(time.RFC3339),
+		ViewedAt:     time.Now().UTC().Format(time.RFC3339),
 	})
 
 	// write response
