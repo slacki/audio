@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/gabriel-vasile/mimetype"
-	uuid "github.com/satori/go.uuid"
+	"github.com/lithammer/shortuuid/v3"
 )
 
 const maxUploadSize = 15 * 1024 * 1024
@@ -54,7 +54,7 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 	if len(fileExtension) == 0 {
 		return HTTPError(http.StatusInternalServerError, "cant_determine_file_ext", err)
 	}
-	fileName := uuid.NewV4().String()
+	fileName := shortuuid.New()
 	newPath := filepath.Join(env.UploadPath, fileName+fileExtension)
 
 	// write file to the storage
