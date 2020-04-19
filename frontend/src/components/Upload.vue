@@ -44,8 +44,6 @@ export default {
             this.$refs.fileUploadField.click();
         },
         filesChange(fieldName, fileList) {
-            console.log(fieldName);
-            console.log(fileList);
             const formData = new FormData();
 
             if (!fileList.length) return;

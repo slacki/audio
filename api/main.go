@@ -27,7 +27,7 @@ func main() {
 	apiV1.Handle("/info/{id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", handlers.Handler{Env: env, H: handlers.HandleInfo}).Methods("GET")
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"https://*.audio.slacki.io", "http://localhost:8080"},
+		AllowedOrigins:   []string{"https://*.audio.slacki.io", "https://audio.slacki.io", "http://localhost:8080"},
 		AllowCredentials: true,
 		Debug:            true,
 	})

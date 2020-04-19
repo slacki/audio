@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     proxy:
-        image: jwilder/nginx-proxy
+        image: jwilder/nginx-proxy:alpine
         container_name: proxy
         restart: unless-stopped
         labels:
@@ -36,10 +36,24 @@ services:
             - "default"
             - "proxy-tier"
 
-    # ---
-    
+    # ---    
+
+    api:
+        image: gcr.io/audio-274519/api:v7
+        container_name: api
+        restart: unless-stopped
+        environment:
+            - VIRTUAL_HOST=api.audio.slacki.io
+            - LETSENCRYPT_HOST=api.audio.slacki.io
+            - LETSENCRYPT_EMAIL=kacperczochara@gmail.com
+        volumes:
+            - ./_data:/api/_data
+            - ./_uploads:/api/_uploads    
+        ports:
+            - "127.0.0.1:9002:8081"
+
     frontend:
-        image: gcr.io/audio-274519/frontend:v4
+        image: gcr.io/audio-274519/frontend:v5
         container_name: frontend
         restart: unless-stopped
         environment: 
@@ -63,20 +77,6 @@ services:
             - ./wwwfrontend.conf:/etc/nginx/conf.d/default.conf
         ports:
             - "127.0.0.1:9001:80"
-
-    api:
-        image: gcr.io/audio-274519/api:v5
-        container_name: api
-        restart: unless-stopped
-        environment:
-            - VIRTUAL_HOST=api.audio.slacki.io
-            - LETSENCRYPT_HOST=api.audio.slacki.io
-            - LETSENCRYPT_EMAIL=kacperczochara@gmail.com
-        volumes:
-            - ./_data:/api/_data
-            - ./_uploads:/api/_uploads    
-        ports:
-            - "127.0.0.1:9002:8081"
 
     static:
         image: gcr.io/audio-274519/static:v4

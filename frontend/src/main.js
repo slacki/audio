@@ -7,8 +7,6 @@ import VueAxios from 'vue-axios'
 
 import './scss/main.scss'
 
-console.log(process.env);
-
 // axios
 axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT;
 Vue.use(VueAxios, axios);
