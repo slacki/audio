@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+    frontend:
+        restart: unless-stopped
+        volumes:
+            - ./frontend:/app
+        ports:
+            - "127.0.0.1:8xxx:80"
+
+    api:
+        restart: unless-stopped
+        volumes:
+            - /????:/api/_data
+            - /????:/api/_uploads    
+        ports:
+            - "127.0.0.1:8xxx:80"
+
+    static:
+        restart: unless-stopped
+        volumes:
+            - /??uploads from api??:/var/www
+            # not needed i guess?
+            #- nginx.conf:/etc/nginx/conf.d/default.conf 
+        ports: 
+            - "127.0.0.1:8xxx:80"
+
+
+            wwwfrontend, redirect image
+            cloud-init script
+            ansible for docker
+            ansible for iptables
+            docker auth on the server
+            mount all volumes
+            docker-letsencrypt-proxy + named volumes and network
+            reconfigure domains for new server's IP
+            test production frontend image (env variables)
