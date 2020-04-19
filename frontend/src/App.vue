@@ -1,6 +1,8 @@
 <template>
-    <div class="wrapper" id="app">
-        <router-view />
+    <div id="app">
+        <div class="wrapper">
+            <router-view />
+        </div>
         <footer>
             <div class="container">
                 <router-link :to="{ name: 'home' }">Home</router-link>

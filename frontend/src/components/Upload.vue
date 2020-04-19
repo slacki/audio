@@ -92,8 +92,6 @@ export default {
 @import "@/scss/variables";
 
 .upload {
-    margin-top: 30px;
-
     .file-upload-field {
         display: none;
     }

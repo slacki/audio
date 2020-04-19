@@ -11,7 +11,11 @@ body {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    padding-bottom: 60px;
+}
+
+.wrapper {
+    min-height: calc(100vh - 70px);
+    padding-top: 80px;
 }
 
 .container {
@@ -33,22 +37,12 @@ a {
     }
 }
 
-.wrapper {
-    padding-top: 80px;
-}
-
-.home {
-    text-align: center;
-}
-
 footer {
-    height: 60px;
     width: 100%;
-    position: absolute;
-    bottom: 0;
     text-align: center;
+    height: 70px;
     a {
-        padding: 0 10px;
+        padding: 20px 10px 0 10px;
         color: $color-secondary;
         display: inline-block;
         &:hover, &:focus {
