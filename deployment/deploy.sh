@@ -1,0 +1,1 @@
+scp -r proxy/ root@116.203.204.18:/root/

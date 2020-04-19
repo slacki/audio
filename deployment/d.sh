@@ -1,1 +1,0 @@
-scp -r proxy/ root@slacki.io:/root/
