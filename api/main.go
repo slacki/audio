@@ -22,7 +22,7 @@ func main() {
 	r := mux.NewRouter()
 	apiV1 := r.PathPrefix("/v1").Subrouter()
 	apiV1.Handle("/upload", handlers.Handler{Env: env, H: handlers.HandleUpload}).Methods("POST")
-	apiV1.Handle("/info/{id:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}}", handlers.Handler{Env: env, H: handlers.HandleInfo}).Methods("GET")
+	apiV1.Handle("/info/{id:[a-zA-Z0-9]+}", handlers.Handler{Env: env, H: handlers.HandleInfo}).Methods("GET")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"https://audio.slacki.io", "http://localhost:8080"},

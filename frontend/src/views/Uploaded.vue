@@ -1,7 +1,16 @@
 <template>
     <div v-if="loaded" class="container uploaded">
         <h1 class="title">{{ file.original_name }}</h1>
-        <player :url="url"></player>
+        <p class="hash">{{ file.hash }}</p>
+
+        <div class="player-wrapper">
+            <player :url="fileUrl"></player>
+        </div>
+
+        <label for="uploadUrl">Upload URL</label>
+        <input id="uploadUrl" type="text" :value="url" />
+        <label for="directUrl">Direct audio file URL</label>
+        <input id="directUrl" type="text" :value="fileUrl" />
     </div>
 </template>
 
@@ -23,8 +32,11 @@ export default {
         };
     },
     computed: {
-        url() {
+        fileUrl() {
             return process.env.VUE_APP_STATIC_ENDPOINT + "/" + this.file.file;
+        },
+        url() {
+            return window.location.href;
         }
     },
     mounted() {
@@ -41,7 +53,11 @@ export default {
 <style lang="scss" scoped>
 @import "@/scss/variables";
 
-.title {
-    padding-bottom: 60px;
+.hash {
+    font-size: 80%;
+}
+
+.player-wrapper {
+    padding: 65px 0;
 }
 </style>
