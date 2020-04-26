@@ -50,3 +50,8 @@ footer {
         }
     }
 }
+
+input[type=email]:focus, input[type=number]:focus, input[type=password]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=text]:focus, input[type=url]:focus, select:focus, textarea:focus {
+    border-color: $color-buttons;
+    outline: 0;
+}
