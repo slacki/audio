@@ -1,4 +1,6 @@
-FROM golang
+FROM golang:1.14-buster
+
+RUN apt update -y && apt upgrade -y && apt install file
 
 RUN go get -u github.com/go-delve/delve/cmd/dlv
 RUN go get -u github.com/githubnemo/CompileDaemon

@@ -5,11 +5,10 @@ WORKDIR /api
 COPY . .
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-w -s" -o api .
 
-# Scratch stage
+# Smaller image stage
 FROM alpine
 
-ARG DATABASE_CONN
-ENV DATABASE_CONN $DATABASE_CONN
+RUN apk add file
 
 COPY --from=build-stage /api/api /api/api
 WORKDIR /api
