@@ -1,1 +1,1 @@
-scp -r proxy/ root@116.203.204.18:/root/
+scp -r audio-proxy/ root@116.203.81.75:/root/
