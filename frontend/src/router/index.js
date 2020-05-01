@@ -11,11 +11,6 @@ const routes = [
         component: Home
     },
     {
-        path: '/:id',
-        name: 'uploadedFile',
-        component: () => import('../views/Uploaded.vue')
-    },
-    {
         path: '/about',
         name: 'about',
         component: () => import('../views/About.vue')
@@ -34,6 +29,11 @@ const routes = [
         path: '/contact',
         name: 'contact',
         component: () => import('../views/Contact.vue')
+    },
+    {
+        path: '/:id',
+        name: 'uploadedFile',
+        component: () => import('../views/Uploaded.vue')
     },
 ]
 
