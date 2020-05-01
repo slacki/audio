@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <div class="wrapper">
+            <notifications />
             <router-view />
         </div>
         <footer>

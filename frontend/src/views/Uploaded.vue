@@ -1,7 +1,7 @@
 <template>
     <div v-if="loaded" class="container uploaded">
         <h1 class="title">{{ file.original_name }}</h1>
-        <p class="hash">{{ file.hash }}</p>
+        <p class="hash">{{ file.views }} {{ viewOrViews }}</p>
 
         <div class="player-wrapper">
             <player :url="fileUrl"></player>
@@ -37,6 +37,9 @@ export default {
         },
         url() {
             return window.location.href;
+        },
+        viewOrViews() {
+            return this.file.views > 1 ? "views" : "view";
         }
     },
     mounted() {

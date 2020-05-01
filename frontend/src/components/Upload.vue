@@ -3,8 +3,8 @@
         <div v-if="!uploading" class="upload-form">
             <h1>Upload your audio</h1>
             <p class="upload-info">
-                mp3, wav and ogg
-                <br />maximum of 15 megabytes
+                mp3, wav, ogg
+                <br />max 15 MiB
             </p>
             <form id="upload-form" enctype="multipart/form-data" novalidate>
                 <input
@@ -46,12 +46,22 @@ export default {
         filesChange(fieldName, fileList) {
             const formData = new FormData();
 
-            if (!fileList.length) return;
+            if (fileList.length != 1) {
+                // only single file uploads for now
+                return;
+            }
 
-            // append the files to FormData
-            Array.from(Array(fileList.length).keys()).map(x => {
-                formData.append(fieldName, fileList[x], fileList[x].name);
-            });
+            if (fileList[0].size > 15 * 1024 * 1024) {
+                this.$notify({
+                    type: "error",
+                    title: "File too big!",
+                    text: "Maximum file size is 15 MiB.",
+                    duration: 3000
+                });
+                return;
+            }
+
+            formData.append(fieldName, fileList[0], fileList[0].name);
 
             // upload
             this.save(formData);
@@ -72,7 +82,19 @@ export default {
                     this.$emit("uploaded", r.data);
                 })
                 .catch(e => {
-                    console.log(e);
+                    let notify = {
+                        type: "error",
+                        title: "Upload failed.",
+                        duration: 3000
+                    };
+                    if (e.message === "Network Error") {
+                        notify.text =
+                            "This file is too big, max size is 15 MiB.";
+                    } else {
+                        notify.text = "Invalid file.";
+                    }
+
+                    this.$notify(notify);
                 })
                 .finally(() => {
                     this.progress = 0;
@@ -100,6 +122,10 @@ export default {
     .upload-button {
         background-color: $color-buttons;
         border-color: $color-buttons;
+    }
+
+    .upload-info {
+        padding: 15px;
     }
 }
 </style>
