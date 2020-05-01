@@ -32,7 +32,7 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 	// validate file size
 	r.Body = http.MaxBytesReader(w, r.Body, maxUploadSize)
 	if err := r.ParseMultipartForm(maxUploadSize); err != nil {
-		return HTTPError(http.StatusBadRequest, "file_too_big", err)
+		return HTTPError(http.StatusRequestEntityTooLarge, "file_too_big", err)
 	}
 
 	// parse and validate file and post parameters
@@ -70,12 +70,13 @@ func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 	mimeFromRequest := http.DetectContentType(fileBytes)
 	mimeFromFile, err := getMimeTypeFromFile(newPath)
 	if err != nil {
-		log.Printf("Can't read mime type from file: %s", err.Error())
+		log.Printf("Can't read mime type from file: %s\n", err.Error())
 	}
-	// if mime type determined form both sources is invalid
-	if !allowedMimeType(mimeFromRequest) && !allowedMimeType(mimeFromFile) {
+	// if mime type determined form file is invalid
+	if !allowedMimeType(mimeFromFile) {
 		// if this fails, we have to remove the file from the storage
 		os.Remove(newPath)
+		log.Printf("MIME type not allowed. [file: %s] [request: %s]", mimeFromFile, mimeFromRequest)
 		return HTTPError(http.StatusBadRequest, "invalid_file_type_mime", nil)
 	}
 
