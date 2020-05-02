@@ -26,7 +26,7 @@ func main() {
 	apiV1.Handle("/contact", handlers.Handler{Env: env, H: handlers.HandleContact}).Methods("POST")
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"https://audio.slacki.io", "http://localhost:8080"},
+		AllowedOrigins:   []string{"https://shareaudio.cc", "http://localhost:8080"},
 		AllowCredentials: true,
 		Debug:            true,
 	})
