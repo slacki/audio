@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     api:
-        image: gcr.io/audio-274519/api:v11
+        image: gcr.io/audio-274519/api:v1.0.0
         container_name: api
         restart: unless-stopped
         environment:
@@ -16,7 +16,7 @@ services:
             - "127.0.0.1:9010:8081"
 
     frontend:
-        image: gcr.io/audio-274519/frontend:v10
+        image: gcr.io/audio-274519/frontend:v1.0.0
         container_name: frontend
         restart: unless-stopped
         environment: 
@@ -40,7 +40,7 @@ services:
             - "127.0.0.1:9012:80"
 
     static:
-        image: gcr.io/audio-274519/static:v4
+        image: gcr.io/audio-274519/static:v1.0.0
         container_name: static
         restart: unless-stopped
         environment: 
