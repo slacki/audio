@@ -17,7 +17,7 @@
                 />
             </form>
 
-            <button @click="uploadButtonClick" class="button-large upload-button">
+            <button @click="uploadButtonClick" class="button-large">
                 <span>Choose files</span>
             </button>
         </div>
@@ -116,12 +116,6 @@ export default {
 .upload {
     .file-upload-field {
         display: none;
-    }
-
-    /* Custom color */
-    .upload-button {
-        background-color: $color-buttons;
-        border-color: $color-buttons;
     }
 
     .upload-info {

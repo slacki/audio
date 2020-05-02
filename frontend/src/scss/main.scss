@@ -59,3 +59,9 @@ input[type=email]:focus, input[type=number]:focus, input[type=password]:focus, i
 .vue-notification {
     margin: 5px;
 }
+
+
+button {
+    background-color: $color-buttons;
+    border-color: $color-buttons;
+}

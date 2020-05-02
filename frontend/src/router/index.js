@@ -11,19 +11,14 @@ const routes = [
         component: Home
     },
     {
-        path: '/about',
-        name: 'about',
-        component: () => import('../views/About.vue')
+        path: '/faq',
+        name: 'faq',
+        component: () => import('../views/FAQ.vue')
     },
     {
-        path: '/privacy',
-        name: 'privacyPolicy',
-        component: () => import('../views/Privacy.vue')
-    },
-    {
-        path: '/terms',
+        path: '/terms-and-privacy',
         name: 'terms',
-        component: () => import('../views/Terms.vue')
+        component: () => import('../views/TermsAndPrivacy.vue')
     },
     {
         path: '/contact',

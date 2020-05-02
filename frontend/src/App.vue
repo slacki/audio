@@ -8,9 +8,8 @@
             <div class="container">
                 <span class="beta">beta</span>
                 <router-link :to="{ name: 'home' }">Home</router-link>
-                <router-link :to="{ name: 'privacyPolicy' }">Privacy</router-link>
-                <router-link :to="{ name: 'terms' }">Terms</router-link>
-                <router-link :to="{ name: 'about' }">About</router-link>
+                <router-link :to="{ name: 'terms' }">Terms &amp; Privacy</router-link>
+                <router-link :to="{ name: 'faq' }">FAQ</router-link>
                 <router-link :to="{ name: 'contact' }">Contact</router-link>
             </div>
         </footer>
