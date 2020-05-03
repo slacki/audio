@@ -1,7 +1,7 @@
 version: '3.7'
 services:
     frontend:
-        image: gcr.io/audio-274519/frontend:v1.0.2
+        image: gcr.io/audio-274519/frontend:v1.0.3
         build:
             context: ../frontend
             dockerfile: Dockerfile.production
