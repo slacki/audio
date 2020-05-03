@@ -18,6 +18,8 @@ services:
         volumes:
             - ./api:/api
             - ./api/_data:/api/_data
+        env_file: 
+            - .env.development
         tty: true
 
     static:

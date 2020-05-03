@@ -5,9 +5,13 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"os"
+	"strconv"
 	"time"
 
+	"github.com/go-acme/lego/log"
 	"github.com/lithammer/shortuuid/v3"
+	"gopkg.in/gomail.v2"
 )
 
 // HandleContact handles requests to /contact endpoint
@@ -29,5 +33,32 @@ func HandleContact(env *Env, w http.ResponseWriter, r *http.Request) error {
 		return HTTPError(http.StatusInternalServerError, "cant_write_data", err)
 	}
 
+	// send email and ignore the errors
+	sendEmail(model.From, model.Text)
+
 	return nil
+}
+
+func sendEmail(from, text string) {
+	host := os.Getenv("API_SMTP_HOST")
+	user := os.Getenv("API_SMTP_USER")
+	password := os.Getenv("API_SMTP_PASSWORD")
+	port, err := strconv.Atoi(os.Getenv("API_SMTP_PORT"))
+	if err != nil {
+		log.Println("Can't parse smtp port")
+		return
+	}
+
+	m := gomail.NewMessage()
+	m.SetHeader("From", from)
+	m.SetHeader("To", "contact@shareaudio.cc")
+	m.SetHeader("Subject", "[shareaudio.cc] contact form")
+	m.SetBody("text/plain", text)
+
+	d := gomail.NewDialer(host, port, user, password)
+
+	// Send the email to Bob, Cora and Dan.
+	if err := d.DialAndSend(m); err != nil {
+		log.Println("Could't dial or send an email", err)
+	}
 }

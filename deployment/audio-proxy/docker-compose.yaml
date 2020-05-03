@@ -11,7 +11,9 @@ services:
             - LETSENCRYPT_EMAIL=kacperczochara@gmail.com
         volumes:
             - ./_data:/api/_data
-            - ./_uploads:/api/_uploads    
+            - ./_uploads:/api/_uploads
+        env_file:
+            - .env.production
         ports:
             - "127.0.0.1:9010:8081"
 
