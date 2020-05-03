@@ -43,6 +43,7 @@ func sendEmail(from, text string) {
 	host := os.Getenv("API_SMTP_HOST")
 	user := os.Getenv("API_SMTP_USER")
 	password := os.Getenv("API_SMTP_PASSWORD")
+	sender := os.Getenv(("API_SMTP_SENDER_ADDRESS"))
 	port, err := strconv.Atoi(os.Getenv("API_SMTP_PORT"))
 	if err != nil {
 		log.Println("Can't parse smtp port")
@@ -51,7 +52,7 @@ func sendEmail(from, text string) {
 
 	m := gomail.NewMessage()
 	m.SetHeader("From", from)
-	m.SetHeader("To", "contact@shareaudio.cc")
+	m.SetHeader("To", sender)
 	m.SetHeader("Subject", "[shareaudio.cc] contact form")
 	m.SetBody("text/plain", text)
 
