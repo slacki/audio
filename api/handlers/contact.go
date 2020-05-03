@@ -3,6 +3,7 @@ package handlers
 import (
 	"api/models"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -51,10 +52,10 @@ func sendEmail(from, text string) {
 	}
 
 	m := gomail.NewMessage()
-	m.SetHeader("From", from)
+	m.SetHeader("From", sender)
 	m.SetHeader("To", sender)
 	m.SetHeader("Subject", "[shareaudio.cc] contact form")
-	m.SetBody("text/plain", text)
+	m.SetBody("text/plain", fmt.Sprintf("From: %s\n Message: %s\n", from, text))
 
 	d := gomail.NewDialer(host, port, user, password)
 
