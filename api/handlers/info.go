@@ -9,6 +9,7 @@ import (
 	"gopkg.in/square/go-jose.v2/json"
 )
 
+// HandleInfo returns information about uploaded file
 func HandleInfo(env *Env, w http.ResponseWriter, r *http.Request) error {
 	vars := mux.Vars(r)
 

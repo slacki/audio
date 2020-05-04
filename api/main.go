@@ -24,6 +24,7 @@ func main() {
 	apiV1.Handle("/upload", handlers.Handler{Env: env, H: handlers.HandleUpload}).Methods("POST")
 	apiV1.Handle("/info/{id:[a-zA-Z0-9]+}", handlers.Handler{Env: env, H: handlers.HandleInfo}).Methods("GET")
 	apiV1.Handle("/contact", handlers.Handler{Env: env, H: handlers.HandleContact}).Methods("POST")
+	apiV1.Handle("/init", handlers.Handler{Env: env, H: handlers.HandleInit}).Methods("GET")
 
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"https://shareaudio.cc", "http://localhost:8080"},

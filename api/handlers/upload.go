@@ -27,7 +27,7 @@ var allowedMimes = []string{
 	"audio/ogg", "application/ogg",
 }
 
-// HandleUpload handles uploaded fles
+// HandleUpload handles file uploads
 func HandleUpload(env *Env, w http.ResponseWriter, r *http.Request) error {
 	// validate file size
 	r.Body = http.MaxBytesReader(w, r.Body, maxUploadSize)
