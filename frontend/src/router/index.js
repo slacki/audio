@@ -21,6 +21,11 @@ const routes = [
         component: () => import('../views/TermsAndPrivacy.vue')
     },
     {
+        path: '/abuse',
+        name: 'abuse',
+        component: () => import('../views/Abuse.vue')
+    },
+    {
         path: '/contact',
         name: 'contact',
         component: () => import('../views/Contact.vue')

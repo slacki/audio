@@ -1,17 +1,17 @@
 version: '3.7'
 services:
     api:
-        image: gcr.io/audio-274519/api:v1.0.6
+        image: gcr.io/audio-274519/api:v1.1.0
         build:
             context: ../api
             dockerfile: Dockerfile.production
     
     frontend:
-        image: gcr.io/audio-274519/frontend:v1.0.4
+        image: gcr.io/audio-274519/frontend:v1.1.0
         build:
             context: ../frontend
             dockerfile: Dockerfile.production
 
     static:
-        image: gcr.io/audio-274519/static:v1.0.1
+        image: gcr.io/audio-274519/static:v1.1.0
         build: ../static
